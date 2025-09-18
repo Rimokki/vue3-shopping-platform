@@ -5,7 +5,7 @@ export interface Category {
   name: string
   picture: string | null
   children: CategoryChild[]
-  goods: GoodsItem[]
+  goods?: GoodsItem[]
 }
 
 export interface CategoryChild {

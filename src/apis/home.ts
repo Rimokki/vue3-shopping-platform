@@ -31,8 +31,9 @@ export interface GoodsListChildren {
   parent: unknown | null
 }
 
-export const getHomeBanner = () => {
-  return request.get<Banner[]>('/home/banner')
+export const getHomeBanner = (distributionSite?: string) => {
+  distributionSite = distributionSite ?? '1'
+  return request.get<Banner[]>('/home/banner', { params: { distributionSite } })
 }
 
 export const getNewGoods = () => {

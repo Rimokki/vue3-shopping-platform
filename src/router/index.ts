@@ -5,6 +5,7 @@ import Layout from '@/views/Layout/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior: () => ({ left: 0, top: 0 }),
   routes: [
     {
       path: '/',
@@ -12,11 +13,18 @@ const router = createRouter({
       children: [
         {
           path: '',
+          name: 'Home',
           component: () => import('@/views/Home/index.vue')
         },
         {
-          path: '/category',
+          path: '/category/:id',
+          name: 'Category',
           component: () => import('@/views/Category/index.vue')
+        },
+        {
+          path: 'category/sub/:id',
+          name: 'SubCategory',
+          component: () => import('@/views/SubCategory/index.vue')
         }
       ]
     },
