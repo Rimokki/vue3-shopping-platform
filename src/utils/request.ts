@@ -46,10 +46,7 @@ class Request {
     return this.instance.request(config)
   }
 
-  public get<T = unknown>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<ApiResponse<T>>> {
+  public get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
     return this.instance.get(url, config)
   }
 
@@ -57,7 +54,7 @@ class Request {
     url: string,
     data?: unknown,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<ApiResponse<T>>> {
+  ): Promise<ApiResponse<T>> {
     return this.instance.post(url, data, config)
   }
 
@@ -65,17 +62,15 @@ class Request {
     url: string,
     data?: unknown,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<ApiResponse<T>>> {
+  ): Promise<ApiResponse<T>> {
     return this.instance.put(url, data, config)
   }
 
-  public delete<T = unknown>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<ApiResponse<T>>> {
+  public delete<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
     return this.instance.delete(url, config)
   }
 }
 
 export default new Request({})
 export { baseURL }
+export type { ApiResponse }
