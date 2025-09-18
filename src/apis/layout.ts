@@ -26,7 +26,7 @@ export interface GoodsItem {
   desc: string
   price: number
   picture: string
-  discount?: null
+  discount?: unknown
   orderNum: number
 }
 
