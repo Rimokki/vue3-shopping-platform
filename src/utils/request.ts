@@ -7,6 +7,8 @@ import type {
   AxiosError
 } from 'axios'
 import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/stores/user'
+import router from '@/router'
 
 const baseURL = 'https://pcapi-xiaotuxian-front-devtest.itheima.net'
 
@@ -24,6 +26,10 @@ class Request {
 
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
+        const userStore = useUserStore()
+        if (userStore.userInfo?.token) {
+          config.headers.Authorization = `Bearer ${userStore.userInfo.token}`
+        }
         return config
       },
       (err: AxiosError) => {
@@ -36,7 +42,12 @@ class Request {
         return res.data
       },
       (err: AxiosError) => {
-        ElMessage.error(err.message)
+        const userStore = useUserStore()
+        ElMessage.error((err.response?.data as { message?: string })?.message || '请求失败')
+        if (err.response?.status === 401) {
+          userStore.clearUserInfo()
+          router.push('/login')
+        }
         return Promise.reject(err)
       }
     )
