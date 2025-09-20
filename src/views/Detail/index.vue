@@ -49,10 +49,6 @@
     }
   }
 
-  const handleCountChange = (val: number) => {
-    console.log(val)
-  }
-
   onMounted(() => getGoods())
 </script>
 
@@ -128,7 +124,7 @@
               <!-- sku组件 -->
               <SkuComponent v-if="goods?.id" :goods="goods" @change="skuChange" />
               <!-- 数据组件 -->
-              <el-input-number v-model="count" :min="1" @change="handleCountChange" />
+              <el-input-number v-model="count" :min="1" />
               <!-- 按钮组件 -->
               <div>
                 <el-button size="large" class="btn" :disabled="disabled" @click="addCart">

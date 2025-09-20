@@ -33,6 +33,18 @@ const router = createRouter({
         {
           path: '/cartlist',
           component: () => import('@/views/CartList/index.vue')
+        },
+        {
+          path: '/checkout',
+          component: () => import('@/views/Checkout/index.vue')
+        },
+        {
+          path: '/pay',
+          component: () => import('@/views/Pay/index.vue')
+        },
+        {
+          path: '/paycallback',
+          component: () => import('@/views/Pay/PayBack.vue')
         }
       ]
     },

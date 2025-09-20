@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useUserStore } from '@/stores/user'
-import { insertCartAPI, getCartListAPI, deleteCartAPI } from '@/apis/cart'
+import { insertCartAPI, getCartListAPI, deleteCartAPI, updateCartCountAPI } from '@/apis/cart'
 
 export interface CartItem {
   id: string | undefined
@@ -64,6 +64,18 @@ export const useCartStore = defineStore(
       cartList.value.forEach((item) => (item.selected = selected))
     }
 
+    const updateItemCount = async (skuId: string, count: number) => {
+      // 找到对应的商品项，修改count
+
+      if (isLogin.value) {
+        await updateCartCountAPI(skuId, { count })
+        updateCartList()
+      } else {
+        const item = cartList.value.find((item) => item.skuId === skuId)
+        if (item) item.count = count
+      }
+    }
+
     const totalCount = computed(() => cartList.value.reduce((total, item) => total + item.count, 0))
     const totalPrice = computed(() =>
       cartList.value.reduce((total, item) => {
@@ -89,6 +101,7 @@ export const useCartStore = defineStore(
       addCart,
       deleteCart,
       updateCartList,
+      updateItemCount,
       singleCheck,
       allCheck,
       clearCart,

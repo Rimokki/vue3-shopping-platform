@@ -21,3 +21,7 @@ export const deleteCartAPI = (ids: string[]) => {
 export const mergeCartAPI = (data: CartParams[]) => {
   return request.post('/member/cart/merge', data)
 }
+
+export const updateCartCountAPI = (id: string, data: { count: number }) => {
+  return request.put(`/member/cart/${id}`, data)
+}

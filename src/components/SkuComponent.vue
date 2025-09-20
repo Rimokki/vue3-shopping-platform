@@ -25,7 +25,7 @@
     if (index === -1) {
       const key = getSelectedSpecs(goods?.specs as Spec[]).join('-')
       const skuIds = skusMap[key]
-      const skuObj = goods?.skus.find((item) => item.id === skuIds[0])
+      const skuObj = skuIds ? goods?.skus.find((item) => item.id === skuIds[0]) : null
       if (skuObj) {
         skuObj.specsText = skuObj.specs.map((item) => item.name + '：' + item.valueName).join('；')
         emits('change', skuObj)

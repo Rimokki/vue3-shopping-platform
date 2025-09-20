@@ -12,6 +12,10 @@
     cartStore.allCheck(selected)
   }
 
+  const handleCountChange = (id: string, count: number) => {
+    cartStore.updateItemCount(id, count)
+  }
+
   const getItemTotalPrice = (price: string | undefined, count: number) => {
     const numericPrice = price ? parseFloat(price) : 0
     return (numericPrice * count).toFixed(2)
@@ -57,7 +61,9 @@
                 <p>&yen;{{ i.price }}</p>
               </td>
               <td class="tc">
-                <el-input-number v-model="i.count" />
+                <el-input-number
+                  :model-value="i.count"
+                  @change="handleCountChange(i.skuId as string, $event)" />
               </td>
               <td class="tc">
                 <p class="f16 red">&yen;{{ getItemTotalPrice(i.price, i.count) }}</p>
@@ -95,7 +101,9 @@
           <span class="red">¥ {{ selectedPrice.toFixed(2) }} </span>
         </div>
         <div class="total">
-          <el-button size="large" type="primary">下单结算</el-button>
+          <el-button size="large" type="primary" @click="$router.push('/checkout')"
+            >下单结算</el-button
+          >
         </div>
       </div>
     </div>
