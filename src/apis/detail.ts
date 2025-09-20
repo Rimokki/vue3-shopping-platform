@@ -55,6 +55,8 @@ export interface SpecValue {
   name?: string
   picture?: string | null
   desc?: string
+  selected?: boolean
+  disabled?: boolean
 }
 
 // SKU接口
@@ -65,6 +67,7 @@ export interface Sku {
   oldPrice: string
   inventory: number
   specs: SkuSpec[]
+  specsText?: string
 }
 
 // SKU规格接口

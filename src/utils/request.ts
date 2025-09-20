@@ -20,7 +20,7 @@ interface ApiResponse<T> {
 
 class Request {
   instance: AxiosInstance
-  baseConfig: AxiosRequestConfig = { baseURL, timeout: 10000 }
+  baseConfig: AxiosRequestConfig = { baseURL, timeout: 100000 }
   constructor(config: AxiosRequestConfig) {
     this.instance = axios.create(Object.assign(this.baseConfig, config))
 

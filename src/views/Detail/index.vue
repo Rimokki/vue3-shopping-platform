@@ -3,17 +3,54 @@
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
   import type { GoodsDetail } from '@/apis/detail'
+  import { ElMessage } from 'element-plus'
   import DetailHot from './components/DetailHot.vue'
   import ImageView from '@/components/ImageView.vue'
+  import SkuComponent from '@/components/SkuComponent.vue'
+  import { useCartStore } from '@/stores/cart'
+  import type { Sku } from '@/apis/detail'
 
+  const cartStore = useCartStore()
+  const count = ref<number>(1)
   const goods = ref<GoodsDetail>()
   const loading = ref<boolean>(false)
   const route = useRoute()
+  const disabled = ref<boolean>(true)
   const getGoods = async () => {
     loading.value = true
     const res = await getDetail(route.params.id as string)
     goods.value = res.result
     loading.value = false
+  }
+
+  let skuObj: Sku | undefined = undefined
+  const skuChange = (sku: Sku | undefined) => {
+    if (sku) {
+      disabled.value = false
+      skuObj = sku
+    } else {
+      disabled.value = true
+    }
+  }
+
+  const addCart = () => {
+    if (skuObj?.id) {
+      cartStore.addCart({
+        id: goods.value?.id,
+        name: goods.value?.name,
+        picture: goods.value?.mainPictures[0],
+        price: goods.value?.price,
+        count: count.value,
+        skuId: skuObj.id,
+        attrsText: skuObj.specsText,
+        selected: true
+      })
+      ElMessage.success('添加购物车成功')
+    }
+  }
+
+  const handleCountChange = (val: number) => {
+    console.log(val)
   }
 
   onMounted(() => getGoods())
@@ -89,12 +126,14 @@
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <SkuComponent v-if="goods?.id" :goods="goods" @change="skuChange" />
               <!-- 数据组件 -->
-
+              <el-input-number v-model="count" :min="1" @change="handleCountChange" />
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn"> 加入购物车 </el-button>
+                <el-button size="large" class="btn" :disabled="disabled" @click="addCart">
+                  加入购物车
+                </el-button>
               </div>
             </div>
           </div>

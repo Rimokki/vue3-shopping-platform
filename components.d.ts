@@ -14,9 +14,11 @@ declare module 'vue' {
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElEmpty: typeof import('element-plus/es')['ElEmpty']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
@@ -24,6 +26,7 @@ declare module 'vue' {
     ImageView: typeof import('./src/components/ImageView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SkuComponent: typeof import('./src/components/SkuComponent.vue')['default']
     XtxSku: typeof import('./src/components/XtxSku/index.vue')['default']
   }
   export interface GlobalDirectives {
