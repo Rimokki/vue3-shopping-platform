@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import type { Sku } from './detail'
 
 export interface CheckoutInfo {
   userAddresses: UserAddress[]
@@ -64,9 +65,9 @@ export interface OrderResult {
   payMoney: number
   totalMoney: number
   totalNum: number
-  skus: null
+  skus: Sku[]
   payChannel: number
-  countdown: null
+  countdown: number
 }
 
 export const getCheckoutInfoAPI = () => request.get<CheckoutInfo>('/member/order/pre')

@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import type { GoodsItem } from './layout'
 
 export interface LoginParams {
   account: string
@@ -21,4 +22,8 @@ export interface UserInfo {
 
 export const loginAPI = (data: LoginParams) => {
   return request.post<UserInfo>('/login', data)
+}
+
+export const getLikeListAPI = () => {
+  return request.get<GoodsItem[]>('/goods/relevant')
 }

@@ -7,7 +7,7 @@
 
   const payInfo = ref<OrderResult>()
   const route = useRoute()
-  const { formatedTime, start } = useCountDown()
+  const { formattedTime, start } = useCountDown()
   const getPayInfo = async () => {
     const { id } = route.query
     const res = await getOrderAPI(id as string)
@@ -35,7 +35,7 @@
           <p>订单提交成功！请尽快完成支付。</p>
           <p>
             支付还剩
-            <span>{{ formatedTime }}</span>
+            <span>{{ formattedTime }}</span>
             ，超时后将取消订单
           </p>
         </div>

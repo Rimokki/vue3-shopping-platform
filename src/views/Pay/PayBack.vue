@@ -32,7 +32,12 @@
           支付金额：<span>¥{{ orderInfo?.payMoney }}</span>
         </p>
         <div class="btn">
-          <el-button type="primary" style="margin-right: 20px">查看订单</el-button>
+          <el-button
+            type="primary"
+            style="margin-right: 20px"
+            @click="$router.replace('/user/order')">
+            查看订单
+          </el-button>
           <el-button @click="$router.replace('/')">进入首页</el-button>
         </div>
         <p class="alert">

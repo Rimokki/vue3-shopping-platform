@@ -5,7 +5,7 @@ export const useCountDown = () => {
   const time = ref<number>(1800)
   let timer: number | null = null
 
-  const formatedTime = computed(() => {
+  const formattedTime = computed(() => {
     return dayjs.unix(time.value).format('mm分ss秒')
   })
   const start = (currentTime: number) => {
@@ -22,5 +22,5 @@ export const useCountDown = () => {
     }
   })
 
-  return { formatedTime, start }
+  return { formattedTime, start }
 }
